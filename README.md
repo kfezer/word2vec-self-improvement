@@ -19,3 +19,22 @@ https://medium.com/explore-artificial-intelligence/word2vec-a-baby-step-in-deep-
 https://github.com/pg2455/U.S-Presidential-Speeches
 
 https://matplotlib.org/index.html
+
+
+
+Feel free to use the Jupyter Notebook version. 
+
+"word2vec-self-improvement.py" is a freestanding Python Application that does the same task. To run it, type
+```
+word2vec-self-improvement.py fun carefree tasty wise older loving
+```
+
+Where the first 3 words indicate your current adjectives and the last indicate your goal state. 
+
+If you are running it with qsub, (like on the Intel DevCloud), you can just submit the launch file to the que by
+```
+qsub launchimprove
+```
+This will also download the pre-trained models. 
+
+Emjoy!
