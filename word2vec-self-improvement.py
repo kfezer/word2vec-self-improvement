@@ -2,6 +2,7 @@ import os
 import gensim
 import random
 import sys
+import urllib.request
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -170,39 +171,50 @@ def printVectorPath(model, worda, wordb):
     
     
 def main():
-    for arg in sys.argv[1:]:
     
+    #for arg in sys.argv[1:]:
     
-    adjective1 = sys.arg[0]
-    adjective2 = sys.arg[1]
-    adjective3 = sys.arg[2]
+    ''' Takes in your 3 starter adjectives and 3 goal adjectives and plots
+        between them
+    '''
+    
+    adjective1 = sys.argv[1]
+    adjective2 = sys.argv[2]
+    adjective3 = sys.argv[3]
     current_adj = [adjective1, adjective2, adjective3]
+    print(current_adj)
     
-    adjective4 = sys.arg[3]
-    adjective5 = sys.arg[4]
-    adjective6 = sys.arg[5]
+    adjective4 = sys.argv[4]
+    adjective5 = sys.argv[5]
+    adjective6 = sys.argv[6]
     goal_adj = [adjective4, adjective5, adjective6]
+    print(goal_adj)
     
+    #download pre-trained word2vec embedded file
+    #urllib.request.urlretrieve("https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz", "GoogleNews-vectors-negative300.bin.gz") 
+    
+    # load pre-trained word2vec embeddings
+    model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz', binary=True)
     
     tuples = []
     for worda in current_adj:
-        distance = 0.0
         closest = model.most_similar_to_given(worda, goal_adj)
         tuples.append([worda, closest])
     print(tuples)
-
+    
     
     adjective1,adjective4 = tuples[0]
     adjective2,adjective5 = tuples[1]
     adjective3,adjective6 = tuples[2]
     
+        
+
+    
+    #feel free to manually modify this, plot worda-> wordb 3 times
     printVectorPath(model, adjective1, adjective4)
     printVectorPath(model, adjective2, adjective5)
     printVectorPath(model, adjective3, adjective6)
-    
-    # load pre-trained word2vec embeddings
-    model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz', binary=True)
-    
+
 if __name__ == "__main__": main()
 
 

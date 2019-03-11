@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N self-improvement
+
+cd $PBS_O_WORKDIR
+echo "activating virtenv & executing"
+wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz"
+source activate tf19-mkl
+python word2vec-self-improvement.py friendly funny intelligent compassionate entertaining innovative
+echo "done"
